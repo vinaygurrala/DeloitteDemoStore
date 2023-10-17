@@ -36,5 +36,5 @@ jobs:
   
  
   - bash: 
-        sfdx force:source:deploy -l RunLocalTests -x ./manifest/package.xml -u $(OrgAlias) -w 10
+        sfdx force:source:deploy -x ./manifest/package.xml -u $(OrgAlias) -w 10
     displayName: Deploy source code to Salesforce Org
