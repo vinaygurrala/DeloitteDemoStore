@@ -1,0 +1,4 @@
+/* Custom CSS to hide the slds-carousel__content */
+.custom-carousel .slds-carousel__content {
+    display: none;
+}
