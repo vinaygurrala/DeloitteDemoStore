@@ -11,7 +11,7 @@ trigger:
     - pr/pr-build-qa.yml
     - pr/pr-build-uat.yml
     - pr/pr-build-master.yml
-pool: myagent
+agent: myagent
 pr: none
 
 jobs:
