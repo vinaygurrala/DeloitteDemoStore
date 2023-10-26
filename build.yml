@@ -32,7 +32,8 @@ jobs:
      #   version: '16.15.0'
   
   - bash: 
-        npm install sfdx-cli --global
+        #npm install sfdx-cli --global
+        sfdx --version
     displayName: Install Salesforce CLI 
   - task: DownloadSecureFile@1
     name: jwtKey
