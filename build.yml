@@ -19,14 +19,21 @@ jobs:
   variables:
   - group: sfdx-org-dev
   steps:
-  - task: UseNode@1
-    displayName: 'Use Node.js 16.15.0'
-    inputs:
-        version: '16.15.0'
-  - bash: npm install sfdx-cli --global
 
-    displayName: Install Salesforce CLI
-    
+  - task: NodeTool@0
+    inputs:
+     versionSpec: '16.x'
+    displayName: 'Install Node.js'
+
+  - script: |
+      npm install @salesforce/cli sfdx-cli --global
+      sfdx --version
+     displayName: 'Install Salesforce DX'
+  #- task: UseNode@1
+    #displayName: 'Use Node.js 16.15.0'
+    #inputs:
+     #   version: '16.15.0'
+  
   - bash: 
         npm install sfdx-cli --global
     displayName: Install Salesforce CLI 
