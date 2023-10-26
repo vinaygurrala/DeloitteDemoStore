@@ -28,7 +28,7 @@ jobs:
   - script: |
       npm install @salesforce/cli sfdx-cli --global
       sfdx --version
-     displayName: 'Install Salesforce DX'
+    displayName: 'Install Salesforce DX'
   #- task: UseNode@1
     #displayName: 'Use Node.js 16.15.0'
     #inputs:
