@@ -23,9 +23,9 @@ jobs:
     displayName: 'Use Node.js 16.15.0'
     inputs:
         version: '16.15.0'
-    - bash: npm install sfdx-cli --global
+  - bash: npm install sfdx-cli --global
 
-      displayName: Install Salesforce CLI
+    displayName: Install Salesforce CLI
     
   - bash: 
         npm install sfdx-cli --global
