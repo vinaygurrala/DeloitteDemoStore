@@ -7,40 +7,28 @@ trigger:
     exclude:
     - README.md
     - azure-pipelines.yml
-    - pr/pr-build-dev.yml
-    - pr/pr-build-qa.yml
-    - pr/pr-build-uat.yml
-    - pr/pr-build-master.yml
+    
 pool: myagent1
 pr: none
-
 jobs:
 - job: Deploy
   variables:
   - group: sfdx-org-dev
   steps:
-
   #- task: NodeTool@0
    # inputs:
     # versionSpec: '16.x'
     #displayName: 'Install Node.js'
-
-  
-  #- task: UseNode@1
-    #displayName: 'Use Node.js 16.15.0'
-    #inputs:
-     #   version: '16.15.0'
-  - task: UsePythonVersion@0
+   - task: UsePythonVersion@0
     inputs:
       versionSpec: '3.x'
       addToPath: true
-
-  - script: |
+   - script: |
      # Install Salesforce CLI
      npm install -g sfdx-cli
     displayName: 'Install Salesforce CLI'
 
-  - script: |
+   - script: |
     # Verify Salesforce CLI installation
      sfdx --version
     displayName: 'Verify Salesforce CLI Installation'
