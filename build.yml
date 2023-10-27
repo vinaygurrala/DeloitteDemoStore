@@ -23,8 +23,8 @@ jobs:
     displayName: 'Use Node.js 16.15.0'
     inputs:
         version: '16.15.0'
-  - script: 
-        sfdx --version
+  - script: node --version 
+        #sfdx --version
     displayName: Install Salesforce CLI underway
   - task: DownloadSecureFile@1
     name: jwtKey
