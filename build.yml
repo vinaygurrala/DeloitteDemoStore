@@ -23,6 +23,7 @@ jobs:
      inputs:
       versionSpec: 3.7.9
       addToPath: true
+      disableDownloadFromRegistry: false
    - script: |
       # Install Salesforce CLI
       npm install -g sfdx-cli
