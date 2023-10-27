@@ -23,7 +23,7 @@ jobs:
     displayName: 'Use Node.js 16.15.0'
     inputs:
         version: '16.15.0'
-  - bash: 
+  - script: 
         sfdx --version
     displayName: Install Salesforce CLI underway
   - task: DownloadSecureFile@1
