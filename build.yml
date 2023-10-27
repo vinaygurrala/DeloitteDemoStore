@@ -20,32 +20,30 @@ jobs:
     # versionSpec: '16.x'
     #displayName: 'Install Node.js'
    - task: UsePythonVersion@0
-    inputs:
+     inputs:
       versionSpec: '3.x'
       addToPath: true
    - script: |
-     # Install Salesforce CLI
-     npm install -g sfdx-cli
-    displayName: 'Install Salesforce CLI'
+      # Install Salesforce CLI
+      npm install -g sfdx-cli
+     displayName: 'Install Salesforce CLI'
 
    - script: |
-    # Verify Salesforce CLI installation
-     sfdx --version
-    displayName: 'Verify Salesforce CLI Installation'
+      # Verify Salesforce CLI installation
+      sfdx --version
+     displayName: 'Verify Salesforce CLI Installation'
   
-  #- bash: npm install sfdx-cli --global
-        #sfdx --version
-    #displayName: Install Salesforce CLI 
-  - task: DownloadSecureFile@1
-    name: jwtKey
-    displayName: 'Download Server JWT Key'
-    inputs:
+   
+   - task: DownloadSecureFile@1
+     name: jwtKey
+     displayName: 'Download Server JWT Key'
+     inputs:
         secureFile: 'server.key'
-  - bash: 
+   - bash: 
         sfdx force:auth:jwt:grant --clientid $(Clientid) --jwtkeyfile ./buildfiles/server.key --username $(SalesforceUserName) --instanceurl $(InstanceUrl) -a $(OrgAlias)
-    displayName: Authorize salesforce org
+     displayName: Authorize salesforce org
   
  
-  - bash: 
+   - bash: 
         sfdx force:source:deploy -x ./manifest/package.xml -u $(OrgAlias) -w 10
-    displayName: Deploy source code to Salesforce Org
+     displayName: Deploy source code to Salesforce Org
