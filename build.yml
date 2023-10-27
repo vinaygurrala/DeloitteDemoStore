@@ -12,6 +12,7 @@ trigger:
     - pr/pr-build-uat.yml
     - pr/pr-build-master.yml
 pr: none
+pool: myagent1
 
 jobs:
 - job: Deploy
