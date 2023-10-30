@@ -1,8 +1,10 @@
+# Salesforce DevOps Pipeline
+
 trigger:
   batch: "true"
   branches:
     include:
-    - main
+    - master
   paths:
     exclude:
     - README.md
@@ -12,32 +14,30 @@ trigger:
     - pr/pr-build-uat.yml
     - pr/pr-build-master.yml
 pr: none
-pool: myagent1
 
 jobs:
 - job: Deploy
-  variables:
+variables:
   - group: sfdx-org-dev
-  steps:
-  - task: UseNode@1
-    displayName: 'Use Node.js 16.15.0'
-    inputs:
+steps:
+    - task: UseNode@1
+      displayName: 'Use Node.js 16.15.0'
+      inputs:
         version: '16.15.0'
-  #- script: node --version 
-        #sfdx --version
-   # displayName: node --version #Install Salesforce CLI underway
-  - task: DownloadSecureFile@1
-    name: jwtKey
-    displayName: 'Download Server JWT Key'
-    inputs:
+    - bash: 
+        npm install sfdx-cli --global
+      displayName: Install Salesforce CLI
+    - task: DownloadSecureFile@1
+      name: jwtKey
+      displayName: 'Download Server JWT Key'
+      inputs:
         secureFile: 'server.key'
-  - bash: 
-        sfdx force:auth:jwt:grant --clientid $(Clientid) --jwtkeyfile ./buildfiles/server.key --username $(SalesforceUserName) --instanceurl $(InstanceUrl) -a $(OrgAlias)
-    displayName: Authorize salesforce org
-  - bash: 
+    - bash: 
+        sfdx force:auth:jwt:grant --clientid $(Clientid) --jwtkeyfile $(jwtKey.secureFilePath) --username $(SalesforceUserName) --instanceurl $(InstanceUrl) -a $(OrgAlias)
+      displayName: Authorize salesforce org
+    - bash: 
         sfdx force:source:deploy -l RunLocalTests -c -x manifest/package.xml -u $(OrgAlias) -w 10
-    displayName: Run Validation on source code
- 
-  - bash: 
-        sfdx force:source:deploy -l RunLocalTests -x ./manifest/package.xml -u $(OrgAlias) -w 10
-    displayName: Deploy source code to Salesforce Org
+      displayName: Run Validation on source code
+    - bash: 
+        sfdx force:source:deploy -l RunLocalTests -x manifest/package.xml -u $(OrgAlias) -w 10
+      displayName: Deploy source code to Salesforce Org
