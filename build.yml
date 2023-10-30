@@ -1,7 +1,7 @@
 # Salesforce DevOps Pipeline
 
 trigger:
-  pool: myagent1
+  
   batch: "true"
   branches:
     include:
