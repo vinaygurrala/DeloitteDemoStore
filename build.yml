@@ -17,9 +17,9 @@ pr: none
 
 jobs:
 - job: Deploy
-variables:
-  - group: sfdx-org-dev
-steps:
+  variables:
+    - group: sfdx-org-dev
+  steps:
     - task: UseNode@1
       displayName: 'Use Node.js 16.15.0'
       inputs:
