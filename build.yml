@@ -27,8 +27,9 @@ jobs:
       inputs:
         version: '16.15.1'
     - script: 
-        npm install sfdx-cli --global
-      displayName: Install Salesforce CLI
+        node --version
+        #npm install sfdx-cli --global
+      displayName: checking node version #Install Salesforce CLI
     - task: DownloadSecureFile@1
       name: jwtKey
       displayName: 'Download Server JWT Key'
