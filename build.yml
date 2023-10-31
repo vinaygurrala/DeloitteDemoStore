@@ -22,13 +22,13 @@ jobs:
   variables:
     - group: sfdx-org-dev
   steps:
-    - task: UseNode@1
-      displayName: 'Use Node.js 16.15.0'
-      inputs:
-        version: 'v18.13.0'
-    - bash: npm install @salesforce/cli --global
+    #- task: UseNode@1
+     # displayName: 'Use Node.js 16.15.0'
+      #inputs:
+       # version: 'v18.13.0'
+   # - bash: npm install @salesforce/cli --global
       #npm install sfdx-cli@<version> –global
-      displayName: Install Salesforce CLI
+      #displayName: Install Salesforce CLI
     - task: DownloadSecureFile@1
       name: jwtKey
       displayName: 'Download Server JWT Key'
